@@ -1,108 +1,296 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>دعوة زفاف فاخرة وتفاعلية</title>
-    
-    <!-- خطوط فخمة واحترافية -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&family=Aref+Ruqaa:wght@400;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دعوة زفاف | طارق و سُجى</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600&display=swap');
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+:root{
+  --ivory:#f7f3eb; --paper:#fffdf8; --gold:#b89b62; --gold2:#d5c08b;
+  --green:#6d8068; --ink:#403a31; --muted:#7c7468;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:Cairo,Arial,sans-serif}
+button{font:inherit}
+section{padding:70px 20px}
+.container{max-width:900px;margin:auto}
+.hero{
+  min-height:100svh;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(255,255,255,.95),transparent 38%),
+    linear-gradient(180deg,#eee9df,#faf7f0 55%,#eee8dc);
+}
+.arch{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.arch:before,.arch:after{content:"";position:absolute;left:50%;transform:translateX(-50%);
+  width:min(90vw,700px);height:80%;bottom:-28%;border:1px solid rgba(184,155,98,.32);
+  border-bottom:0;border-radius:360px 360px 0 0;
+}
+.arch:after{width:min(76vw,580px);height:68%;bottom:-20%;opacity:.5}
+.intro{text-align:center;position:relative;z-index:2}
+.eyebrow{letter-spacing:3px;color:var(--green);font-size:12px}
+h1,h2,.names{font-family:Amiri,serif}
+.names{font-size:clamp(44px,11vw,92px);line-height:1.15;margin:12px 0;color:#3d382f}
+.intro p{color:var(--muted)}
+.envelope-wrap{width:min(82vw,430px);margin:35px auto 0;perspective:1000px;cursor:pointer}
+.envelope{height:260px;position:relative;transform-style:preserve-3d;transition:transform 1s}
+.env-body{position:absolute;inset:0;background:#fffdfa;border:1px solid #ddd5c6;box-shadow:0 22px 60px #7b6b4b25}
+.env-left,.env-right{position:absolute;bottom:0;width:0;height:0;border-top:130px solid transparent;border-bottom:130px solid transparent}
+.env-left{left:0;border-left:210px solid #eee8dd}.env-right{right:0;border-right:210px solid #eee8dd}
+.flap{position:absolute;top:0;left:0;width:0;height:0;border-left:215px solid transparent;border-right:215px solid transparent;border-top:140px solid #f8f5ee;transform-origin:top;transition:transform 1s;z-index:3}
+.seal{position:absolute;z-index:5;left:50%;top:105px;transform:translate(-50%,-50%);width:70px;height:70px;border-radius:50%;
+background:var(--green);color:#fff;display:grid;place-items:center;font-family:Amiri;font-size:25px;box-shadow:0 7px 20px #0002}
+.open .flap{transform:rotateX(175deg)}
+.open .envelope{transform:translateY(-20px)}
+.open .seal{opacity:0;transition:.3s}
+.cta{display:inline-block;margin-top:25px;padding:12px 28px;border:1px solid var(--gold);color:var(--ink);background:#fff9;border-radius:30px;cursor:pointer}
+#invitation{display:none}
+#invitation.show{display:block;animation:fade .9s ease}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.card{max-width:760px;margin:auto;background:var(--paper);border:1px solid #d6c29a;padding:55px 28px;box-shadow:0 25px 70px #6f62441c;position:relative}
+.card:before{content:"";position:absolute;inset:10px;border:1px solid #e7d8b6;pointer-events:none}
+.card>*{position:relative}
+.divider{width:90px;height:1px;background:var(--gold);margin:25px auto}
+.names2{font:700 clamp(42px,9vw,78px) Amiri,serif;text-align:center}
+.subtitle{text-align:center;color:var(--muted);line-height:2}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px auto;max-width:600px}
+.time{background:#fff;border:1px solid #e6dcc8;padding:14px 5px}
+.time b{display:block;font:700 32px Amiri;color:var(--green)}
+.time span{font-size:11px;color:var(--muted)}
+.details{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:25px}
+.detail{padding:20px 10px;border:1px solid #e4dac7;background:#fffdf9}
+.detail strong{display:block;font-family:Amiri;font-size:22px;margin:5px}
+.detail small{color:var(--muted)}
+.gold-btn{display:inline-block;text-decoration:none;background:var(--green);color:#fff;padding:12px 25px;border-radius:28px;margin-top:20px}
+.timeline{max-width:620px;margin:25px auto}
+.event{border-right:2px solid var(--gold);padding:0 20px 25px;margin-right:12px}
+.event:last-child{padding-bottom:0}
+.event time{color:var(--green);font-size:13px}
+.event h3{font-family:Amiri;margin:5px 0;font-size:25px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:700px;margin:auto}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;cursor:pointer;transition:.3s}
+.gallery img:hover{transform:scale(1.015)}
+.rsvp{max-width:600px;margin:auto}
+input,textarea,select{width:100%;padding:13px;border:1px solid #ddd2bd;background:#fffdf9;border-radius:8px;margin:7px 0 12px;font-family:inherit}
+textarea{min-height:100px;resize:vertical}
+.submit{border:0;background:var(--green);color:#fff;padding:13px 30px;border-radius:30px;cursor:pointer}
+.message{text-align:center;color:var(--green);margin-top:15px}
+.share{text-align:center}
+.floating{position:fixed;left:18px;bottom:18px;z-index:20;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:#fff;color:var(--green);cursor:pointer;box-shadow:0 5px 20px #0002}
+footer{text-align:center;padding:35px;color:#938a7b;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:50;place-items:center;padding:20px}
+.modal.show{display:grid}
+.modal img{max-width:95vw;max-height:85vh;border-radius:8px}
+.close{position:absolute;top:18px;right:18px;color:#fff;background:none;border:0;font-size:32px;cursor:pointer}
+@media(max-width:600px){
+  section{padding:55px 14px}
+  .envelope{height:220px}.env-left{border-left-width:165px;border-top-width:110px;border-bottom-width:110px}
+  .env-right{border-right-width:165px;border-top-width:110px;border-bottom-width:110px}
+  .flap{border-left-width:170px;border-right-width:170px;border-top-width:120px}
+  .seal{top:90px}
+  .details{grid-template-columns:1fr}
+  .countdown{gap:5px}.time b{font-size:25px}
+}
+</style>
+</head>
+<body>
 
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            font-family: 'Tajawal', sans-serif;
-            overflow-x: hidden;
-            background-color: #110003; 
-            padding: 20px 15px;
-        }
+<header class="hero" id="home">
+  <div class="arch"></div>
+  <div class="intro">
+    <div class="eyebrow">دعوة زفاف</div>
+    <div class="names">طارق &amp; سُجى</div>
+    <p>بكل الحب والود نتشرف بدعوتكم لمشاركتنا فرحتنا</p>
 
-        /* الخلفية الملكية اللانهائية الدقة */
-        .bg-lux {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: 
-                radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 85% 80%, rgba(255, 182, 193, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, #3a0210 0%, #0a0002 100%);
-            z-index: -2;
-        }
+    <div class="envelope-wrap" id="openInvitation" aria-label="فتح دعوة الزفاف">
+      <div class="envelope" id="envelope">
+        <div class="env-body"></div>
+        <div class="env-left"></div><div class="env-right"></div>
+        <div class="flap"></div>
+        <div class="seal">ت<br>س</div>
+      </div>
+    </div>
+    <button class="cta" id="openBtn">افتحوا الدعوة</button>
+  </div>
+</header>
 
-        /* ---------------- قسم الصورة التفاعلية ---------------- */
-        .interactive-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            transition: all 1.5s ease;
-            z-index: 10;
-        }
+<main id="invitation">
+<section>
+  <div class="card">
+    <p class="subtitle">بسم الله الرحمن الرحيم</p>
+    <div class="divider"></div>
+    <p class="subtitle">يسرّنا دعوتكم لمشاركتنا أجمل لحظات العمر</p>
+    <div class="names2">طارق<br><span style="font-size:.55em;color:var(--gold)">و</span><br>سُجى</div>
+    <p class="subtitle">نسعد بحضوركم ومشاركتكم فرحتنا</p>
+  </div>
+</section>
 
-        .image-wrapper {
-            position: relative;
-            width: 85vw; 
-            max-width: 280px; 
-            aspect-ratio: 3 / 4; 
-            border-radius: 50%; 
-            overflow: hidden; 
-            border: 4px solid #d4af37; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.5);
-            -webkit-backface-visibility: hidden;
-            -moz-backface-visibility: hidden;
-            transform: translate3d(0, 0, 0);
-        }
+<section>
+  <div class="container">
+    <h2 style="text-align:center;font-size:38px">موعدنا مع الفرح</h2>
+    <div class="divider"></div>
+    <div class="countdown">
+      <div class="time"><b id="days">00</b><span>أيام</span></div>
+      <div class="time"><b id="hours">00</b><span>ساعات</span></div>
+      <div class="time"><b id="minutes">00</b><span>دقائق</span></div>
+      <div class="time"><b id="seconds">00</b><span>ثواني</span></div>
+    </div>
 
-        .interactive-section.shrink {
-            transform: scale(0.7);
-            margin-bottom: -30px;
-        }
+    <div class="details">
+      <div class="detail"><small>التاريخ</small><strong>20 سبتمبر 2026</strong></div>
+      <div class="detail"><small>الوقت</small><strong>08:00 مساءً</strong></div>
+      <div class="detail"><small>المكان</small><strong>قاعة الفرح</strong></div>
+    </div>
 
-        .couple-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
+    <div style="text-align:center">
+      <a class="gold-btn" target="_blank" href="https://maps.google.com/?q=Tripoli+Libya">فتح الموقع على الخريطة</a>
+    </div>
+  </div>
+</section>
 
-        canvas.scratch-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            cursor: pointer;
-            transition: opacity 1.5s ease;
-        }
+<section>
+  <div class="container">
+    <h2 style="text-align:center;font-size:38px">برنامج المناسبة</h2>
+    <div class="divider"></div>
+    <div class="timeline">
+      <div class="event"><time>07:00 مساءً</time><h3>استقبال الضيوف</h3><p>نستقبلكم بكل محبة وترحاب.</p></div>
+      <div class="event"><time>08:00 مساءً</time><h3>مراسم عقد القران</h3><p>لحظة مباركة نشاركها مع أحبائنا.</p></div>
+      <div class="event"><time>09:00 مساءً</time><h3>حفل الزفاف</h3><p>نحتفل معًا بهذه المناسبة السعيدة.</p></div>
+      <div class="event"><time>10:00 مساءً</time><h3>العشاء</h3><p>نتمنى لكم أمسية سعيدة.</p></div>
+    </div>
+  </div>
+</section>
 
-        .instruction {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ffb6c1;
-            font-size: clamp(1rem, 5vw, 1.3rem); 
-            font-weight: 700;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
-            z-index: 3;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
+<section>
+  <div class="container">
+    <h2 style="text-align:center;font-size:38px">لحظاتنا</h2>
+    <div class="divider"></div>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="صورة زفاف">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="تفاصيل زفاف">
+      <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=900&q=80" alt="زهور زفاف">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="احتفال زفاف">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="rsvp">
+    <h2 style="text-align:center;font-size:38px">تأكيد الحضور</h2>
+    <div class="divider"></div>
+    <p style="text-align:center;color:var(--muted)">يسعدنا تأكيد حضوركم لمشاركتنا هذه الليلة.</p>
+    <form id="rsvpForm">
+      <label>الاسم</label>
+      <input id="guestName" required placeholder="اكتب اسمك">
+      <label>عدد الحضور</label>
+      <select id="guestCount"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+      <label>رسالة للعروسين (اختياري)</label>
+      <textarea id="guestMessage" placeholder="اكتب رسالتك..."></textarea>
+      <div style="text-align:center"><button class="submit">تأكيد الحضور</button></div>
+      <div class="message" id="formMessage"></div>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="share">
+    <h2 style="font-size:34px">شاركوا فرحتنا</h2>
+    <p style="color:var(--muted)">يمكنكم مشاركة الدعوة مع أحبائكم.</p>
+    <button class="gold-btn" id="whatsapp">مشاركة عبر WhatsApp</button>
+    <button class="gold-btn" id="copyLink" style="background:transparent;color:var(--green);border:1px solid var(--green)">نسخ رابط الدعوة</button>
+  </div>
+</section>
+</main>
+
+<button class="floating" id="musicBtn" aria-label="الموسيقى">♪</button>
+<footer>بكل الحب صُممت هذه الدعوة لتشارككم فرحتنا 🤍</footer>
+
+<div class="modal" id="modal">
+  <button class="close" id="closeModal">×</button>
+  <img id="modalImg" src="" alt="صورة مكبرة">
+</div>
+
+<script>
+// عدّل تاريخ الزفاف هنا:
+const weddingDate = new Date("2026-09-20T20:00:00+02:00");
+
+function updateCountdown(){
+  const diff = weddingDate - new Date();
+  if(diff <= 0){
+    ["days","hours","minutes","seconds"].forEach(id=>document.getElementById(id).textContent="00");
+    return;
+  }
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor(diff/3600000)%24;
+  const m=Math.floor(diff/60000)%60;
+  const s=Math.floor(diff/1000)%60;
+  document.getElementById("days").textContent=String(d).padStart(2,"0");
+  document.getElementById("hours").textContent=String(h).padStart(2,"0");
+  document.getElementById("minutes").textContent=String(m).padStart(2,"0");
+  document.getElementById("seconds").textContent=String(s).padStart(2,"0");
+}
+setInterval(updateCountdown,1000); updateCountdown();
+
+const openBtn=document.getElementById("openBtn");
+const wrap=document.getElementById("openInvitation");
+const hero=document.querySelector(".hero");
+function openInvitation(){
+  document.getElementById("envelope").classList.add("open");
+  setTimeout(()=>{
+    document.getElementById("invitation").classList.add("show");
+    document.getElementById("invitation").scrollIntoView({behavior:"smooth"});
+  },850);
+}
+openBtn.addEventListener("click",openInvitation);
+wrap.addEventListener("click",openInvitation);
+
+document.getElementById("rsvpForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("guestName").value.trim();
+  const count=document.getElementById("guestCount").value;
+  document.getElementById("formMessage").textContent=`شكرًا ${name}، تم تسجيل رغبتك بالحضور لعدد ${count} من الأشخاص.`;
+  e.target.reset();
+});
+
+document.getElementById("whatsapp").addEventListener("click",()=>{
+  const text="دعوة زفاف طارق و سُجى 🤍%0Aيسعدنا مشاركتكم فرحتنا.%0A"+location.href;
+  window.open("https://wa.me/?text="+text,"_blank");
+});
+
+document.getElementById("copyLink").addEventListener("click",async()=>{
+  try{
+    await navigator.clipboard.writeText(location.href);
+    document.getElementById("copyLink").textContent="تم نسخ الرابط ✓";
+    setTimeout(()=>document.getElementById("copyLink").textContent="نسخ رابط الدعوة",1800);
+  }catch(e){alert("انسخ الرابط من شريط المتصفح.");}
+});
+
+document.querySelectorAll(".gallery img").forEach(img=>{
+  img.addEventListener("click",()=>{
+    document.getElementById("modalImg").src=img.src;
+    document.getElementById("modal").classList.add("show");
+  });
+});
+document.getElementById("closeModal").onclick=()=>document.getElementById("modal").classList.remove("show");
+document.getElementById("modal").addEventListener("click",e=>{
+  if(e.target.id==="modal") e.currentTarget.classList.remove("show");
+});
+
+// الموسيقى: ضع رابط ملف MP3 الخاص بك في المتغير التالي.
+let audio=null;
+document.getElementById("musicBtn").addEventListener("click",()=>{
+  if(!audio){
+    audio=new Audio("");
+    alert("لإضافة الموسيقى، ضع رابط ملف MP3 داخل المتغير audio في الكود.");
+    return;
+  }
+  audio.paused ? audio.play() : audio.pause();
+});
+</script>
+</body>
+</html>
             text-align: center;
             width: 100%;
             animation: pulse 2s infinite;
