@@ -3,36 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف تفاعلية</title>
-    <!-- استيراد الخطوط -->
+    <title>دعوة زفاف فاخرة</title>
+    
+    <!-- مكتبة الأشرطة الملونة (Confetti) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- خطوط احترافية واضحة وفخمة -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap');
 
         body {
             margin: 0;
-            background-color: #fcf9f2;
+            /* خلفية ملكية داكنة لإبراز الألوان الذهبية */
+            background: radial-gradient(circle at center, #1a2a3a 0%, #0a1118 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             overflow-x: hidden;
+            color: #fff;
+        }
+
+        /* حاوية الإطار الذهبي الفخم */
+        .gold-border-wrapper {
+            padding: 8px;
+            /* تدرج لوني ذهبي لامع */
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            border-radius: 50%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0,0,0,0.5);
+            margin-top: 20px;
+            z-index: 10;
         }
 
         /* الإطار البيضاوي للصورة */
         .oval-frame {
-            width: 300px;
-            height: 400px;
-            border-radius: 50%; /* يجعل الشكل بيضاوياً بناءً على الأبعاد */
-            border: 5px solid #d4af37; /* إطار ذهبي */
+            width: 320px;
+            height: 420px;
+            border-radius: 50%;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            margin-top: 20px;
+            background-color: #000;
+            border: 4px solid #fff; /* خط أبيض رفيع للتباين */
         }
 
-        /* الصورة الأساسية الواضحة (خلفية الإطار) */
+        /* صورة العروسين عالية الجودة */
         .oval-frame img {
             width: 100%;
             height: 100%;
@@ -43,8 +59,8 @@
             z-index: 1;
         }
 
-        /* الكانفاس الذي سيحتوي على الطبقة المضببة */
-        canvas {
+        /* كانفاس المسح */
+        canvas.scratch-layer {
             position: absolute;
             top: 0;
             left: 0;
@@ -52,74 +68,104 @@
             height: 100%;
             z-index: 2;
             cursor: pointer;
-            transition: opacity 1.5s ease; /* تأثير تلاشي ناعم عند انتهاء المسح */
+            transition: opacity 1.5s ease;
         }
 
-        /* نص الإرشاد فوق الصورة */
+        /* نص الإرشاد النبض */
         .instruction {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #ffffff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+            color: #fcf6ba;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
             z-index: 3;
-            pointer-events: none; /* لمنع النص من إعاقة المسح */
+            pointer-events: none;
             transition: opacity 0.5s ease;
             text-align: center;
             width: 100%;
+            animation: pulse 2s infinite;
         }
 
-        /* تفاصيل الدعوة التي ستظهر لاحقاً */
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* تفاصيل الدعوة الاحترافية */
         .invitation-details {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.5s ease;
+            transform: translateY(40px) scale(0.95);
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            margin-top: 40px;
-            padding: 0 20px;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            max-width: 90%;
+            width: 400px;
+            z-index: 5;
         }
 
-        /* الصنف الذي سيتم إضافته لإظهار التفاصيل */
         .invitation-details.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         .names {
-            font-family: 'Amiri', serif;
-            font-size: 2.2rem;
-            color: #d4af37;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 3rem;
+            /* نص بلون ذهبي متدرج */
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .message {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.8;
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            line-height: 1.9;
+            font-weight: 500;
+        }
+
+        .message strong {
+            color: #fcf6ba;
+            font-weight: 800;
+            font-size: 1.3rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- المنطقة التفاعلية (الإطار البيضاوي) -->
-    <div class="oval-frame">
-        <!-- ضع رابط صورة العروسين الحقيقية في خاصية src أدناه -->
-        <img id="couple-image" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80" alt="العروسين">
-        <canvas id="scratch-canvas"></canvas>
-        <div class="instruction" id="instruction-text">امسح بإصبعك لاكتشاف الدعوة</div>
+    <!-- ملف الصوت (الموسيقى الملحمية) -->
+    <!-- يرجى استبدال الرابط أدناه برابط الموسيقى الخاصة بك (mp3) -->
+    <audio id="epic-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+
+    <!-- الإطار الذهبي الفخم -->
+    <div class="gold-border-wrapper">
+        <div class="oval-frame">
+            <!-- ضع رابط صورة العروسين عالية الجودة هنا -->
+            <img id="couple-image" src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop" alt="العروسين">
+            <canvas id="scratch-canvas" class="scratch-layer"></canvas>
+            <div class="instruction" id="instruction-text">امسح بلطف لاكتشاف الدعوة</div>
+        </div>
     </div>
 
-    <!-- المرفقات والتفاصيل التي ستظهر بعد المسح -->
+    <!-- تفاصيل الدعوة -->
     <div class="invitation-details" id="details-section">
         <div class="names">أحمد & فاطمة</div>
         <div class="message">
-            يسعدنا أن تشاركونا أجمل لحظات عمرنا<br>
+            تتشرف عائلاتنا بدعوتكم لمشاركتنا ليلة العمر<br><br>
             <strong>الخميس، 15 أكتوبر 2026</strong><br>
-            قاعة الأفراح الكبرى - المدينة
+            قاعة القصر الملكي للمناسبات
         </div>
     </div>
 
@@ -129,60 +175,52 @@
         const img = document.getElementById('couple-image');
         const instruction = document.getElementById('instruction-text');
         const details = document.getElementById('details-section');
+        const music = document.getElementById('epic-music');
 
-        // ضبط أبعاد الكانفاس لتتطابق مع الإطار
-        canvas.width = 300;
-        canvas.height = 400;
+        canvas.width = 320;
+        canvas.height = 420;
 
         let isDrawing = false;
-        let wipeCount = 0; // عداد لمعرفة كمية المسح
-        let isRevealed = false; // حالة الدعوة
+        let wipeCount = 0;
+        let isRevealed = false;
 
-        // دالة لرسم الصورة المضببة على الكانفاس عند تحميل الصفحة
+        // تجهيز الطبقة المضببة
         function initCanvas() {
-            // إضافة تأثير التضبيب بنسبة كبيرة
-            ctx.filter = 'blur(25px)';
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            ctx.filter = 'blur(30px)'; // تضبيب عالي جداً
+            ctx.drawImage(img, -20, -20, canvas.width + 40, canvas.height + 40); // تكبير طفيف لتجنب حواف غير مضببة
             
-            // إضافة طبقة بيضاء خفيفة فوق الصورة المضببة لإبراز نص الإرشاد
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            // إضافة طبقة ذهبية داكنة شفافة لزيادة الفخامة
+            ctx.fillStyle = 'rgba(20, 15, 5, 0.5)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // إعادة ضبط الفلتر حتى لا يؤثر على عملية المسح
             ctx.filter = 'none';
         }
 
-        // إذا تم تحميل الصورة مسبقاً
         if (img.complete) {
             initCanvas();
         } else {
             img.onload = initCanvas;
         }
 
-        // بدء عملية المسح
         function startDrawing(e) {
             if (isRevealed) return;
             isDrawing = true;
-            instruction.style.opacity = '0'; // إخفاء نص "امسح بإصبعك" فوراً
+            instruction.style.opacity = '0'; 
             draw(e);
         }
 
-        // إنهاء عملية المسح (رفع الإصبع)
         function stopDrawing() {
             isDrawing = false;
             ctx.beginPath();
-            checkCompletion(); // التحقق مما إذا كان المستخدم مسح جزءاً كافياً
+            checkCompletion();
         }
 
-        // دالة المسح (التي تجعل الأجزاء الممسوحة شفافة)
         function draw(e) {
             if (!isDrawing || isRevealed) return;
-            e.preventDefault(); // منع تدرج الشاشة أثناء المسح بالهاتف
+            e.preventDefault();
 
             const rect = canvas.getBoundingClientRect();
             let x, y;
 
-            // تحديد إحداثيات اللمس أو الماوس
             if (e.type.includes('touch')) {
                 x = e.touches[0].clientX - rect.left;
                 y = e.touches[0].clientY - rect.top;
@@ -191,55 +229,86 @@
                 y = e.clientY - rect.top;
             }
 
-            // إعدادات فرشاة المسح
-            ctx.lineWidth = 45; // حجم الإصبع/الفرشاة
+            ctx.lineWidth = 55; // فرشاة عريضة لتسهيل المسح
             ctx.lineCap = 'round';
-            ctx.globalCompositeOperation = 'destination-out'; // هذا الأمر يحذف ما يتم رسمه ويكشف ما تحته
+            ctx.globalCompositeOperation = 'destination-out';
 
             ctx.lineTo(x, y);
             ctx.stroke();
             ctx.beginPath();
             ctx.moveTo(x, y);
 
-            // زيادة العداد مع كل حركة
             wipeCount++;
             
-            // إذا تجاوز العداد حد معين، نعتبر أن الزائر مسح كفاية
-            if (wipeCount > 70) {
+            if (wipeCount > 50) {
                 checkCompletion();
             }
         }
 
-        // أحداث الماوس لأجهزة الكمبيوتر
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mouseup', stopDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseleave', stopDrawing);
 
-        // أحداث اللمس للهواتف الذكية
         canvas.addEventListener('touchstart', startDrawing, { passive: false });
         canvas.addEventListener('touchend', stopDrawing);
         canvas.addEventListener('touchmove', draw, { passive: false });
 
-        // دالة إظهار التفاصيل المخفية عند اكتمال المسح
+        // تأثير الأشرطة الملونة الاحتفالية
+        function fireConfetti() {
+            var duration = 4000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#d4af37', '#ffffff', '#ffdf00'] // ألوان متناسقة مع الفخامة
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#d4af37', '#ffffff', '#ffdf00']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
         function checkCompletion() {
             if (isRevealed) return;
             
-            // إذا كان المستخدم قد حرك إصبعه عدد مرات كافٍ
-            if (wipeCount > 80) {
+            // عند الوصول لنسبة مسح معينة
+            if (wipeCount > 60) {
                 isRevealed = true;
                 
-                // إخفاء الكانفاس بالكامل بتأثير ناعم
+                // 1. إخفاء الكانفاس ببطء
                 canvas.style.opacity = '0';
                 
-                // إظهار تفاصيل الدعوة بعد ثانية واحدة
+                // 2. تشغيل الموسيقى الملحمية
+                try {
+                    music.volume = 0.7; // ضبط مستوى الصوت
+                    music.play();
+                } catch (error) {
+                    console.log("الرابط الصوتي يحتاج للمراجعة أو المتصفح يمنع التشغيل التلقائي");
+                }
+
+                // 3. إطلاق الأشرطة الملونة
+                fireConfetti();
+                
+                // 4. إظهار التفاصيل الفخمة
                 setTimeout(() => {
                     canvas.style.display = 'none';
                     details.classList.add('show');
-                }, 500);
+                }, 800);
             }
         }
     </script>
-
 </body>
 </html>
